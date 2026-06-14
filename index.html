@@ -3,549 +3,828 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smit Patel</title>
+<title>Smit Patel - Biodata</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --gold: #b8963e;
-    --dark: #1a1a2e;
-    --mid: #2d2d44;
-    --light-bg: #f8f7f4;
-    --text: #2c2c2c;
-    --muted: #666;
-    --white: #ffffff;
+/* ===== Base Styles & Variables ===== */
+:root {
+  --bg-color: #FBF9F4;        /* warm ivory */
+  --primary-color: #0F3D2E;   /* deep emerald */
+  --emerald: #1F5C49;         /* mid emerald */
+  --emerald-deep: #0A2C20;    /* darkest emerald */
+  --accent-color: #BF9B5A;    /* gold */
+  --accent-light: #D9BE84;    /* light gold */
+  --text-color: #3C3C3C;
+  --light-bg: #EEF3EF;        /* soft sage tint */
+  --border-color: #E0DBCB;
+  --white: #FFFFFF;
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--bg-color);
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(31, 92, 73, 0.05) 0%, transparent 38%),
+    radial-gradient(circle at 88% 92%, rgba(191, 155, 90, 0.06) 0%, transparent 40%);
+  background-attachment: fixed;
+  color: var(--text-color);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* ===== Reveal-on-scroll (progressive enhancement) ===== */
+body.reveal-on .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+body.reveal-on .reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ===== Lightbox ===== */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 44, 32, 0.92);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  backdrop-filter: blur(6px);
+}
+#lightbox.active { opacity: 1; visibility: visible; }
+#lightbox img {
+  max-width: 90%;
+  max-height: 90vh;
+  border-radius: 8px;
+  border: 3px solid var(--accent-color);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.55);
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+#lightbox.active img { transform: scale(1); }
+#lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 40px;
+  cursor: pointer;
+  z-index: 2001;
+  font-family: Arial, sans-serif;
+  font-weight: 300;
+  transition: color 0.3s ease;
+}
+#lightbox-close:hover { color: var(--accent-light); }
+
+/* ===== Navigation ===== */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(251, 249, 244, 0.92);
+  backdrop-filter: blur(12px);
+  padding: 18px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(15, 61, 46, 0.07);
+  transition: var(--transition);
+}
+nav.scrolled {
+  padding: 13px 5%;
+  box-shadow: 0 4px 24px rgba(15, 61, 46, 0.07);
+}
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 25px;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-decoration: none;
+  letter-spacing: 2px;
+}
+.logo span { color: var(--accent-color); }
+.nav-right { display: flex; align-items: center; gap: 32px; }
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+  transition: var(--transition);
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--accent-color);
+  transition: var(--transition);
+}
+.nav-links a:hover { color: var(--accent-color); }
+.nav-links a:hover::after { width: 100%; }
+
+/* Download button */
+.btn-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  color: var(--primary-color);
+  padding: 11px 22px;
+  border: 1px solid var(--accent-color);
+  border-radius: 40px;
+  background: linear-gradient(135deg, rgba(217,190,132,0.18), rgba(191,155,90,0.10));
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.btn-pdf:hover {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-light));
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(191, 155, 90, 0.35);
+  transform: translateY(-2px);
+}
+.btn-pdf svg { width: 14px; height: 14px; }
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  flex-direction: column;
+  gap: 6px;
+}
+.hamburger span {
+  width: 25px;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: var(--transition);
+}
+
+/* ===== Hero ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 130px 5% 70px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -18%;
+  right: -12%;
+  width: 52vw;
+  height: 52vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(31, 92, 73, 0.10) 0%, rgba(251, 253, 251, 0) 68%);
+  z-index: -1;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -16%;
+  left: -10%;
+  width: 40vw;
+  height: 40vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(191, 155, 90, 0.10) 0%, rgba(251, 253, 251, 0) 70%);
+  z-index: -1;
+}
+.hero-content {
+  max-width: 1000px;
+  display: flex;
+  align-items: center;
+  gap: 70px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1.1s ease forwards;
+}
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-image {
+  flex-shrink: 0;
+  position: relative;
+}
+.hero-image img {
+  width: 320px;
+  height: 410px;
+  object-fit: cover;
+  border-radius: 200px 200px 0 0;
+  box-shadow: 0 24px 50px rgba(15, 61, 46, 0.18);
+  border: 3px solid var(--white);
+  outline: 1px solid var(--accent-color);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  z-index: 2;
+}
+.hero-image img:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 34px 60px rgba(31, 92, 73, 0.28);
+}
+.hero-image::after {
+  content: '';
+  position: absolute;
+  bottom: -16px;
+  right: -16px;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--accent-color);
+  border-radius: 200px 200px 0 0;
+  z-index: 1;
+}
+.hero-image::before {
+  content: '';
+  position: absolute;
+  top: -16px;
+  left: -16px;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--emerald);
+  border-radius: 200px 200px 0 0;
+  opacity: 0.45;
+  z-index: 1;
+}
+.hero-text .subtitle {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: var(--accent-color);
+  margin-bottom: 18px;
+  display: block;
+  font-weight: 600;
+}
+.hero-text h1 {
+  font-size: 5.2rem;
+  line-height: 1;
+  margin-bottom: 18px;
+  letter-spacing: -1px;
+  color: var(--primary-color);
+}
+.hero-accent-line {
+  width: 90px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-color), var(--emerald));
+  margin: 0 0 18px;
+}
+.hero-text .title {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+.hero-text .btn-pdf { margin-top: 30px; }
+
+/* ===== Sections ===== */
+section {
+  padding: 100px 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.section-header .subtitle {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: var(--accent-color);
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.section-header h2 {
+  font-size: 3.2rem;
+  display: inline-block;
+}
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 16px;
+}
+.divider .line {
+  width: 54px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-color));
+}
+.divider .line:last-child {
+  background: linear-gradient(90deg, var(--accent-color), transparent);
+}
+.divider .diamond {
+  color: var(--accent-color);
+  font-size: 13px;
+  line-height: 1;
+}
+
+/* ===== Grid ===== */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+
+/* ===== Cards ===== */
+.card {
+  position: relative;
+  background: var(--white);
+  padding: 44px;
+  border-radius: 14px;
+  box-shadow: 0 14px 40px rgba(15, 61, 46, 0.06);
+  border: 1px solid rgba(191, 155, 90, 0.18);
+  transition: var(--transition);
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color), var(--emerald));
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 50px rgba(15, 61, 46, 0.12);
+}
+.info-row {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+}
+.info-row:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.info-label {
+  flex: 0 0 120px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent-color);
+  font-weight: 600;
+  padding-top: 1px;
+}
+.info-value {
+  font-size: 15px;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+/* ===== Timeline ===== */
+.timeline {
+  position: relative;
+  padding-left: 32px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  height: calc(100% - 4px);
+  width: 2px;
+  background: linear-gradient(var(--accent-color), rgba(31, 92, 73, 0.25));
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 38px;
+}
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -37px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--emerald);
+  box-shadow: 0 0 0 4px rgba(191, 155, 90, 0.25);
+}
+.timeline-date {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent-color);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.timeline-title {
+  font-size: 1.45rem;
+  margin-bottom: 5px;
+}
+.timeline-subtitle {
+  font-size: 0.92rem;
+  color: var(--text-color);
+}
+
+/* ===== Gallery ===== */
+.gallery-img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+  filter: grayscale(18%);
+  border: 1px solid var(--border-color);
+}
+.gallery-img:hover {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+  box-shadow: 0 18px 38px rgba(15, 61, 46, 0.16);
+}
+
+/* ===== Mini Cards (Family / Contact) ===== */
+.mini-card {
+  text-align: center;
+  padding: 32px 22px;
+  background: var(--light-bg);
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: var(--transition);
+}
+.mini-card:hover {
+  background: var(--white);
+  border-color: rgba(191, 155, 90, 0.3);
+  box-shadow: 0 14px 28px rgba(15, 61, 46, 0.08);
+  transform: translateY(-4px);
+}
+.mini-card .role {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent-color);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.mini-card .name {
+  font-size: 1.15rem;
+  color: var(--primary-color);
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+}
+.mini-card .detail {
+  font-size: 12px;
+  margin-top: 5px;
+  color: var(--text-color);
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 48px 40px;
+  background-color: var(--emerald-deep);
+  color: rgba(255,255,255,0.55);
+  font-size: 12px;
+  letter-spacing: 1px;
+  border-top: 2px solid var(--accent-color);
+}
+.footer-mono {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  letter-spacing: 4px;
+  color: var(--accent-light);
+  margin-bottom: 10px;
+}
+
+/* ===== Print ===== */
+@media print {
+  body { background: #fff; font-size: 11pt; color: #000; }
+  nav, footer, .hamburger, .btn-pdf { display: none !important; }
+  section { padding: 18px 0; page-break-inside: avoid; }
+  .hero { min-height: auto; padding: 0 0 26px; }
+  .hero-image img { width: 190px; height: 240px; border-radius: 95px 95px 0 0; box-shadow: none; }
+  .hero-image::after, .hero-image::before { display: none; }
+  .card, .mini-card { box-shadow: none; border: 1px solid #ccc; background: #fff; }
+  .card::before { display: none; }
+  .gallery-img { filter: none; height: 200px; }
+  .section-header h2 { font-size: 24pt; color: #0F3D2E; }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .hero-content { flex-direction: column-reverse; text-align: center; gap: 44px; }
+  .hero-text h1 { font-size: 3.6rem; }
+  .hero-accent-line { margin-left: auto; margin-right: auto; }
+  .hero-image::after { right: 0; }
+  .hero-image::before { left: 0; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .hamburger { display: flex; }
+  .nav-right { gap: 0; }
+  .nav-links {
+    position: fixed;
+    top: 66px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 66px);
+    background: var(--bg-color);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    transition: var(--transition);
   }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Georgia', serif; background: var(--light-bg); color: var(--text); }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; width: 100%; background: var(--dark);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 40px; height: 64px; z-index: 1000;
-    border-bottom: 2px solid var(--gold);
-  }
-  .nav-logo { color: var(--gold); font-size: 20px; letter-spacing: 3px; font-weight: bold; font-family: Arial, sans-serif; }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { color: #ccc; text-decoration: none; font-family: Arial, sans-serif; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s; }
-  .nav-links a:hover { color: var(--gold); }
-
-  /* HERO */
-  #home {
-    min-height: 100vh;
-    background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 100%);
-    display: flex; align-items: center; justify-content: center;
-    padding-top: 64px;
-  }
-  .hero-inner { display: flex; align-items: center; gap: 70px; max-width: 960px; padding: 60px 40px; }
-  .hero-photo {
-    width: 100%; max-width: 260px; height: auto; flex-shrink: 0;
-    border: 3px solid var(--gold);
-    overflow: hidden;
-  }
-  .hero-photo img { width: 100%; height: auto; display: block; }
-  .hero-text h1 { font-size: 56px; color: var(--white); line-height: 1.1; letter-spacing: 2px; font-family: Arial, sans-serif; font-weight: 900; }
-  .hero-text h1 span { color: var(--gold); }
-  .hero-divider { width: 60px; height: 3px; background: var(--gold); margin: 20px 0; }
-  .hero-text .tagline { font-size: 14px; color: #aaa; letter-spacing: 2px; text-transform: uppercase; font-family: Arial, sans-serif; margin-bottom: 10px; }
-  .hero-text .job { font-size: 16px; color: var(--gold); font-family: Arial, sans-serif; letter-spacing: 1px; }
-
-  /* SECTIONS */
-  section { padding: 80px 40px; max-width: 960px; margin: 0 auto; }
-  .section-title {
-    font-size: 13px; letter-spacing: 4px; text-transform: uppercase;
-    color: var(--gold); font-family: Arial, sans-serif; margin-bottom: 8px;
-  }
-  .section-heading {
-    font-size: 36px; color: var(--dark); margin-bottom: 40px;
-    border-bottom: 2px solid var(--gold); padding-bottom: 12px;
-    font-family: Arial, sans-serif; font-weight: 900;
-  }
-
-  /* ABOUT */
-  #about { background: var(--white); max-width: 100%; padding: 80px 0; }
-  #about > .inner { max-width: 960px; margin: 0 auto; padding: 0 40px; }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
-  .info-item { margin-bottom: 16px; display: flex; align-items: baseline; gap: 10px; }
-  .info-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-family: Arial, sans-serif; min-width: 90px; }
-  .info-value { font-size: 14px; color: var(--text); font-family: Arial, sans-serif; }
-
-  /* EDUCATION */
-  #education { background: var(--light-bg); max-width: 100%; padding: 80px 0; }
-  #education > .inner { max-width: 960px; margin: 0 auto; padding: 0 40px; }
-  .timeline { position: relative; padding-left: 30px; }
-  .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: var(--gold); }
-  .timeline-item { position: relative; margin-bottom: 36px; }
-  .timeline-item::before { content: ''; position: absolute; left: -28px; top: 6px; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); border: 3px solid var(--white); }
-  .timeline-years { font-size: 12px; color: var(--gold); letter-spacing: 1px; font-family: Arial, sans-serif; margin-bottom: 4px; }
-  .timeline-title { font-size: 17px; font-weight: bold; color: var(--dark); font-family: Arial, sans-serif; }
-  .timeline-sub { font-size: 14px; color: var(--muted); font-family: Arial, sans-serif; }
-
-  /* WORK */
-  #work { background: var(--white); max-width: 100%; padding: 80px 0; }
-  #work > .inner { max-width: 960px; margin: 0 auto; padding: 0 40px; }
-  .work-card {
-    border: 1px solid #e0ddd5; padding: 28px 32px;
-    display: flex; align-items: center; gap: 24px;
-  }
-  .work-icon { width: 56px; height: 56px; background: var(--dark); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .work-icon span { color: var(--gold); font-size: 22px; font-weight: 900; font-family: Arial, sans-serif; }
-  .work-title { font-size: 20px; font-weight: bold; color: var(--dark); font-family: Arial, sans-serif; }
-  .work-company { font-size: 15px; color: var(--gold); font-family: Arial, sans-serif; letter-spacing: 1px; }
-
-  /* FAMILY */
-  #family { background: var(--light-bg); max-width: 100%; padding: 80px 0; }
-  #family > .inner { max-width: 960px; margin: 0 auto; padding: 0 40px; }
-  .family-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .family-card { background: var(--white); border-left: 3px solid var(--gold); padding: 14px 18px; }
-  .family-role { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-family: Arial, sans-serif; }
-  .family-name { font-size: 15px; color: var(--dark); font-family: Arial, sans-serif; font-weight: bold; margin-top: 2px; }
-  .family-detail { font-size: 13px; color: var(--muted); font-family: Arial, sans-serif; }
-
-  /* GALLERY */
-  #gallery { background: var(--dark); max-width: 100%; padding: 80px 0; }
-  #gallery > .inner { max-width: 960px; margin: 0 auto; padding: 0 40px; }
-  #gallery .section-heading { color: var(--white); border-bottom-color: var(--gold); }
-  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .gallery-img { width: 100%; height: auto; display: block; border: 2px solid var(--gold); border-radius: 8px; }
-
-  /* CONTACT */
-  #contact { background: var(--mid); max-width: 100%; padding: 80px 0; }
-  #contact > .inner { max-width: 960px; margin: 0 auto; padding: 0 40px; }
-  #contact .section-heading { color: var(--white); border-bottom-color: var(--gold); }
-  .contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .contact-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(184,150,62,0.3); padding: 24px; text-align: center; }
-  .contact-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-family: Arial, sans-serif; margin-bottom: 8px; }
-  .contact-value { font-size: 14px; color: #ddd; font-family: Arial, sans-serif; }
-
-  /* FOOTER */
-  footer { background: var(--dark); text-align: center; padding: 24px; border-top: 2px solid var(--gold); }
-  footer p { color: #666; font-size: 12px; font-family: Arial, sans-serif; letter-spacing: 1px; }
-
-  /* HAMBURGER MENU BUTTON */
-  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; z-index: 1001; }
-  .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--gold); margin: 5px 0; transition: all 0.3s ease; }
-  .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-  .nav-toggle.active span:nth-child(2) { opacity: 0; }
-  .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-  /* ==================== MOBILE STYLES ==================== */
-
-  /* Tablets & small laptops */
-  @media (max-width: 768px) {
-    /* NAV MOBILE */
-    nav { padding: 0 20px; }
-    .nav-toggle { display: block; }
-    .nav-links {
-      display: none; flex-direction: column; position: fixed;
-      top: 64px; left: 0; right: 0; background: var(--dark);
-      padding: 20px 0; gap: 0; border-bottom: 2px solid var(--gold);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
-    .nav-links.open { display: flex; }
-    .nav-links li { text-align: center; padding: 14px 20px; }
-    .nav-links a { font-size: 15px; letter-spacing: 2px; }
-
-    /* HERO MOBILE */
-    #home { padding-top: 64px; min-height: auto; }
-    .hero-inner {
-      flex-direction: column; gap: 30px;
-      padding: 40px 20px; text-align: center;
-    }
-    .hero-photo { width: 100%; max-width: 220px; height: auto; margin: 0 auto; }
-    .hero-text h1 { font-size: 32px; letter-spacing: 1px; }
-    .hero-divider { margin: 16px auto; }
-    .hero-text .tagline { font-size: 12px; letter-spacing: 1.5px; }
-    .hero-text .job { font-size: 14px; }
-
-    /* SECTIONS MOBILE */
-    section { padding: 50px 20px; }
-    #about > .inner, #education > .inner, #work > .inner,
-    #family > .inner, #gallery > .inner, #contact > .inner {
-      padding: 0 20px;
-    }
-    .section-heading { font-size: 26px; margin-bottom: 28px; }
-    .section-title { font-size: 11px; letter-spacing: 3px; }
-
-    /* ABOUT MOBILE */
-    .about-grid { grid-template-columns: 1fr; gap: 24px; }
-    .info-item { flex-direction: column; gap: 4px; }
-    .info-label { min-width: auto; }
-
-    /* WORK MOBILE */
-    .work-card { flex-direction: column; text-align: center; gap: 16px; padding: 24px 20px; }
-
-    /* FAMILY MOBILE */
-    .family-grid { grid-template-columns: 1fr; gap: 12px; }
-
-    /* GALLERY MOBILE */
-    .gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .gallery-img { height: auto; }
-
-    /* CONTACT MOBILE */
-    .contact-grid { grid-template-columns: 1fr; gap: 16px; }
-    .contact-card { padding: 18px; }
-
-    /* FOOTER MOBILE */
-    footer { padding: 18px 16px; }
-    footer p { font-size: 11px; }
-  }
-
-  /* Phones (small screens) */
-  @media (max-width: 480px) {
-    nav { height: 56px; padding: 0 16px; }
-    .nav-logo { font-size: 18px; letter-spacing: 2px; }
-    .nav-links { top: 56px; }
-
-    #home { padding-top: 56px; }
-    .hero-inner { padding: 30px 16px; gap: 24px; }
-    .hero-photo { width: 100%; max-width: 190px; height: auto; margin: 0 auto; }
-    .hero-text h1 { font-size: 26px; }
-    .hero-text .tagline { font-size: 11px; }
-    .hero-text .job { font-size: 13px; }
-    .hero-divider { width: 40px; height: 2px; margin: 12px auto; }
-
-    section { padding: 40px 16px; }
-    #about > .inner, #education > .inner, #work > .inner,
-    #family > .inner, #gallery > .inner, #contact > .inner {
-      padding: 0 16px;
-    }
-    .section-heading { font-size: 22px; margin-bottom: 24px; padding-bottom: 10px; }
-    .section-title { font-size: 10px; letter-spacing: 2.5px; margin-bottom: 6px; }
-
-    .gallery-grid { grid-template-columns: 1fr; gap: 10px; }
-    .gallery-img { height: auto; }
-
-    .info-value { font-size: 13px; }
-    .info-label { font-size: 10px; }
-
-    .timeline { padding-left: 22px; }
-    .timeline-item::before { left: -20px; width: 10px; height: 10px; }
-    .timeline-title { font-size: 15px; }
-    .timeline-sub { font-size: 13px; }
-    .timeline-years { font-size: 11px; }
-
-    .work-card { padding: 20px 16px; }
-    .work-title { font-size: 17px; }
-    .work-company { font-size: 13px; }
-
-    .family-card { padding: 12px 14px; }
-    .family-name { font-size: 14px; }
-    .family-role { font-size: 9px; }
-    .family-detail { font-size: 12px; }
-
-    .contact-value { font-size: 13px; }
-    .contact-label { font-size: 9px; }
-    .contact-card { padding: 16px; }
-
-    footer { padding: 16px 12px; }
-    footer p { font-size: 10px; letter-spacing: 0.5px; }
-  }
-
-  /* HAMBURGER MENU BUTTON */
-  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; z-index: 1001; }
-  .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--gold); margin: 5px 0; transition: all 0.3s ease; }
-  .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-  .nav-toggle.active span:nth-child(2) { opacity: 0; }
-  .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-
-  /* ==================== MOBILE STYLES ==================== */
-
-  /* Tablets & small laptops */
-  @media (max-width: 768px) {
-    /* NAV MOBILE */
-    nav { padding: 0 20px; }
-    .nav-toggle { display: block; }
-    .nav-links {
-      display: none; flex-direction: column; position: fixed;
-      top: 64px; left: 0; right: 0; background: var(--dark);
-      padding: 20px 0; gap: 0; border-bottom: 2px solid var(--gold);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    }
-    .nav-links.open { display: flex; }
-    .nav-links li { text-align: center; padding: 14px 20px; }
-    .nav-links a { font-size: 15px; letter-spacing: 2px; }
-
-    /* HERO MOBILE */
-    #home { padding-top: 64px; min-height: auto; }
-    .hero-inner {
-      flex-direction: column; gap: 30px;
-      padding: 40px 20px; text-align: center;
-    }
-    .hero-photo { width: 100%; max-width: 220px; height: auto; margin: 0 auto; }
-    .hero-text h1 { font-size: 32px; letter-spacing: 1px; }
-    .hero-divider { margin: 16px auto; }
-    .hero-text .tagline { font-size: 12px; letter-spacing: 1.5px; }
-    .hero-text .job { font-size: 14px; }
-
-    /* SECTIONS MOBILE */
-    section { padding: 50px 20px; }
-    #about > .inner, #education > .inner, #work > .inner,
-    #family > .inner, #gallery > .inner, #contact > .inner {
-      padding: 0 20px;
-    }
-    .section-heading { font-size: 26px; margin-bottom: 28px; }
-    .section-title { font-size: 11px; letter-spacing: 3px; }
-
-    /* ABOUT MOBILE */
-    .about-grid { grid-template-columns: 1fr; gap: 24px; }
-    .info-item { flex-direction: column; gap: 4px; }
-    .info-label { min-width: auto; }
-
-    /* WORK MOBILE */
-    .work-card { flex-direction: column; text-align: center; gap: 16px; padding: 24px 20px; }
-
-    /* FAMILY MOBILE */
-    .family-grid { grid-template-columns: 1fr; gap: 12px; }
-
-    /* GALLERY MOBILE */
-    .gallery-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .gallery-img { height: auto; }
-
-    /* CONTACT MOBILE */
-    .contact-grid { grid-template-columns: 1fr; gap: 16px; }
-    .contact-card { padding: 18px; }
-
-    /* FOOTER MOBILE */
-    footer { padding: 18px 16px; }
-    footer p { font-size: 11px; }
-  }
-
-  /* Phones (small screens) */
-  @media (max-width: 480px) {
-    nav { height: 56px; padding: 0 16px; }
-    .nav-logo { font-size: 18px; letter-spacing: 2px; }
-    .nav-links { top: 56px; }
-
-    #home { padding-top: 56px; }
-    .hero-inner { padding: 30px 16px; gap: 24px; }
-    .hero-photo { width: 100%; max-width: 190px; height: auto; margin: 0 auto; }
-    .hero-text h1 { font-size: 26px; }
-    .hero-text .tagline { font-size: 11px; }
-    .hero-text .job { font-size: 13px; }
-    .hero-divider { width: 40px; height: 2px; margin: 12px auto; }
-
-    section { padding: 40px 16px; }
-    #about > .inner, #education > .inner, #work > .inner,
-    #family > .inner, #gallery > .inner, #contact > .inner {
-      padding: 0 16px;
-    }
-    .section-heading { font-size: 22px; margin-bottom: 24px; padding-bottom: 10px; }
-    .section-title { font-size: 10px; letter-spacing: 2.5px; margin-bottom: 6px; }
-
-    .gallery-grid { grid-template-columns: 1fr; gap: 10px; }
-    .gallery-img { height: auto; }
-
-    .info-value { font-size: 13px; }
-    .info-label { font-size: 10px; }
-
-    .timeline { padding-left: 22px; }
-    .timeline-item::before { left: -20px; width: 10px; height: 10px; }
-    .timeline-title { font-size: 15px; }
-    .timeline-sub { font-size: 13px; }
-    .timeline-years { font-size: 11px; }
-
-    .work-card { padding: 20px 16px; }
-    .work-title { font-size: 17px; }
-    .work-company { font-size: 13px; }
-
-    .family-card { padding: 12px 14px; }
-    .family-name { font-size: 14px; }
-    .family-role { font-size: 9px; }
-    .family-detail { font-size: 12px; }
-
-    .contact-value { font-size: 13px; }
-    .contact-label { font-size: 9px; }
-    .contact-card { padding: 16px; }
-
-    footer { padding: 16px 12px; }
-    footer p { font-size: 10px; letter-spacing: 0.5px; }
-  }
-
+  .nav-links.active { left: 0; }
+  .nav .btn-pdf { display: none; }
+  .section-header h2 { font-size: 2.6rem; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAVIGATION -->
-<nav>
-  <div class="nav-logo">SP</div>
-  <button class="nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open'); this.classList.toggle('active');">
-    <span></span><span></span><span></span>
-  </button>
-  <ul class="nav-links">
-    <li><a href="#home" onclick="closeMenu()">Home</a></li>
-    <li><a href="#about" onclick="closeMenu()">About</a></li>
-    <li><a href="#education" onclick="closeMenu()">Education</a></li>
-    <li><a href="#work" onclick="closeMenu()">Work</a></li>
-    <li><a href="#family" onclick="closeMenu()">Family</a></li>
-    <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
-    <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
-  </ul>
+<nav id="navbar">
+  <a href="#" class="logo">Smit<span>Patel</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about" onclick="toggleMenu()">About</a></li>
+      <li><a href="#education" onclick="toggleMenu()">Education</a></li>
+      <li><a href="#work" onclick="toggleMenu()">Experience</a></li>
+      <li><a href="#family" onclick="toggleMenu()">Family</a></li>
+      <li><a href="#gallery" onclick="toggleMenu()">Gallery</a></li>
+      <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+    </ul>
+    <a href="Smit-Patel-Biodata.pdf" class="btn-pdf" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      PDF
+    </a>
+    <button class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section id="home">
-  <div class="hero-inner">
-    <div class="hero-photo">
-      <img src="profile.png" alt="Smit Patel">
-    </div>
+<div id="lightbox">
+  <div id="lightbox-close">&times;</div>
+  <img id="lightbox-img" src="" alt="Popup Image">
+</div>
+
+<section class="hero">
+  <div class="hero-content">
     <div class="hero-text">
-      <p class="tagline">Biodata</p>
-      <h1>SMIT<br><span>PATEL</span></h1>
-      <div class="hero-divider"></div>
-      <p class="job">Senior Sales Representative — Vodafone</p>
+      <span class="subtitle">Biodata</span>
+      <h1>Smit Patel</h1>
+      <div class="hero-accent-line"></div>
+      <p class="title">Senior Sales Representative — Vodafone</p>
+      <a href="Smit-Patel-Biodata.pdf" class="btn-pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download PDF
+      </a>
+    </div>
+    <div class="hero-image">
+      <img src="profile.png" alt="Smit Patel" class="clickable-image">
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
-  <div class="inner">
-    <p class="section-title">Personal</p>
-    <h2 class="section-heading">About Me</h2>
-    <div class="about-grid">
-      <div>
-        <div class="info-item"><span class="info-label">DOB</span><span class="info-value">21 December 2001</span></div>
-        <div class="info-item"><span class="info-label">Height</span><span class="info-value">5.7</span></div>
-        <div class="info-item"><span class="info-label">Weight</span><span class="info-value">75 KG</span></div>
-        <div class="info-item"><span class="info-label">Hobbies</span><span class="info-value">Biking, Swimming</span></div>
-      </div>
-      <div>
-        <div class="info-item"><span class="info-label">Caste</span><span class="info-value">Hindu Kadwa Patidar</span></div>
-        <div class="info-item"><span class="info-label">Samaj</span><span class="info-value">Nana Bar</span></div>
-        <div class="info-item"><span class="info-label">Native</span><span class="info-value">Patan</span></div>
-        <div class="info-item"><span class="info-label">Maternal</span><span class="info-value">Kahoda</span></div>
-      </div>
+  <div class="section-header reveal">
+    <span class="subtitle">Personal Details</span>
+    <h2>About Me</h2>
+    <div class="divider"><span class="line"></span><span class="diamond">&#10022;</span><span class="line"></span></div>
+  </div>
+  <div class="grid-2">
+    <div class="card reveal">
+      <div class="info-row"><div class="info-label">DOB</div><div class="info-value">21 December 2001</div></div>
+      <div class="info-row"><div class="info-label">Height</div><div class="info-value">5.7</div></div>
+      <div class="info-row"><div class="info-label">Weight</div><div class="info-value">75 KG</div></div>
+      <div class="info-row"><div class="info-label">Hobbies</div><div class="info-value">Biking, Swimming</div></div>
+    </div>
+    <div class="card reveal">
+      <div class="info-row"><div class="info-label">Caste</div><div class="info-value">Hindu Kadwa Patidar</div></div>
+      <div class="info-row"><div class="info-label">Samaj</div><div class="info-value">Nana Bar</div></div>
+      <div class="info-row"><div class="info-label">Native</div><div class="info-value">Patan</div></div>
+      <div class="info-row"><div class="info-label">Maternal</div><div class="info-value">Kahoda</div></div>
     </div>
   </div>
 </section>
 
-<!-- EDUCATION -->
 <section id="education">
-  <div class="inner">
-    <p class="section-title">Academic</p>
-    <h2 class="section-heading">Education</h2>
+  <div class="section-header reveal">
+    <span class="subtitle">Academic</span>
+    <h2>Education</h2>
+    <div class="divider"><span class="line"></span><span class="diamond">&#10022;</span><span class="line"></span></div>
+  </div>
+  <div class="card reveal">
     <div class="timeline">
       <div class="timeline-item">
-        <div class="timeline-years">2019 — 2023</div>
-        <div class="timeline-title">Bachelors in Information & Technology</div>
-        <div class="timeline-sub">SilverOak Institute of Technology</div>
+        <div class="timeline-date">2024 — 2025</div>
+        <h3 class="timeline-title">Master of Information & Technology</h3>
+        <p class="timeline-subtitle">University of Technology Sydney</p>
       </div>
       <div class="timeline-item">
-        <div class="timeline-years">2024 — 2025</div>
-        <div class="timeline-title">Master of Information & Technology</div>
-        <div class="timeline-sub">University of Technology Sydney</div>
+        <div class="timeline-date">2019 — 2023</div>
+        <h3 class="timeline-title">Bachelors in Information & Technology</h3>
+        <p class="timeline-subtitle">SilverOak Institute of Technology</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WORK -->
 <section id="work">
-  <div class="inner">
-    <p class="section-title">Career</p>
-    <h2 class="section-heading">Work Experience</h2>
-    <div class="work-card">
-      <div class="work-icon"><span>V</span></div>
-      <div>
-        <div class="work-title">Senior Sales Representative</div>
-        <div class="work-company">Vodafone</div>
+  <div class="section-header reveal">
+    <span class="subtitle">Career</span>
+    <h2>Work Experience</h2>
+    <div class="divider"><span class="line"></span><span class="diamond">&#10022;</span><span class="line"></span></div>
+  </div>
+  <div class="card reveal">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">Current</div>
+        <h3 class="timeline-title">Senior Sales Representative</h3>
+        <p class="timeline-subtitle">Vodafone</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FAMILY -->
 <section id="family">
-  <div class="inner">
-    <p class="section-title">Background</p>
-    <h2 class="section-heading">Family</h2>
-    <div class="family-grid">
-      <div class="family-card">
-        <div class="family-role">Grandfather</div>
-        <div class="family-name">Ramniklal Prabhudas Patel</div>
-      </div>
-      <div class="family-card">
-        <div class="family-role">Grandmother</div>
-        <div class="family-name">Ramilaben Ramniklal Patel</div>
-      </div>
-      <div class="family-card">
-        <div class="family-role">Father</div>
-        <div class="family-name">Bhaveshkumar Ramniklal Patel</div>
-        <div class="family-detail">Business — Dharm Metal</div>
-      </div>
-      <div class="family-card">
-        <div class="family-role">Mother</div>
-        <div class="family-name">Shilpaben Bhaveshkumar Patel</div>
-        <div class="family-detail">Housewife</div>
-      </div>
-      <div class="family-card" style="grid-column: 1 / -1;">
-        <div class="family-role">Address</div>
-        <div class="family-name" style="font-weight: normal; font-size: 14px;">145, Haridarshan Park Society, opp. Baroda Express Highway, Ahmedabad</div>
+  <div class="section-header reveal">
+    <span class="subtitle">Background</span>
+    <h2>Family</h2>
+    <div class="divider"><span class="line"></span><span class="diamond">&#10022;</span><span class="line"></span></div>
+  </div>
+  <div class="grid-3">
+    <div class="mini-card reveal">
+      <div class="role">Grandfather</div>
+      <div class="name">Ramniklal Prabhudas Patel</div>
+    </div>
+    <div class="mini-card reveal">
+      <div class="role">Grandmother</div>
+      <div class="name">Ramilaben Ramniklal Patel</div>
+    </div>
+    <div class="mini-card reveal">
+      <div class="role">Father</div>
+      <div class="name">Bhaveshkumar Ramniklal Patel</div>
+      <div class="detail">Business — Dharm Metal</div>
+    </div>
+    <div class="mini-card reveal">
+      <div class="role">Mother</div>
+      <div class="name">Shilpaben Bhaveshkumar Patel</div>
+      <div class="detail">Housewife</div>
+    </div>
+    <div class="mini-card reveal" style="grid-column: 1 / -1; padding: 30px;">
+      <div class="role">Address</div>
+      <div class="name" style="font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 500;">
+        145, Haridarshan Park Society, opp. Baroda Express Highway, Ahmedabad
       </div>
     </div>
   </div>
 </section>
 
-<!-- GALLERY -->
 <section id="gallery">
-  <div class="inner">
-    <p class="section-title">Photos</p>
-    <h2 class="section-heading">Gallery</h2>
-    <div class="gallery-grid">
-      <img class="gallery-img" src="1.jpeg" alt="Smit Patel">
-      <img class="gallery-img" src="2.jpeg" alt="Smit Patel">
-      <img class="gallery-img" src="3.jpeg" alt="Smit Patel">
-    </div>
+  <div class="section-header reveal">
+    <span class="subtitle">Photos</span>
+    <h2>Gallery</h2>
+    <div class="divider"><span class="line"></span><span class="diamond">&#10022;</span><span class="line"></span></div>
+  </div>
+  <div class="grid-3">
+    <img src="1.jpeg" alt="Smit Patel" class="gallery-img clickable-image reveal">
+    <img src="2.jpeg" alt="Smit Patel" class="gallery-img clickable-image reveal">
+    <img src="3.jpeg" alt="Smit Patel" class="gallery-img clickable-image reveal">
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
-  <div class="inner">
-    <p class="section-title">Get in Touch</p>
-    <h2 class="section-heading">Contact</h2>
-    <div class="contact-grid">
-      <div class="contact-card">
-        <div class="contact-label">Mobile</div>
-        <div class="contact-value">+61 413 518 312</div>
-      </div>
-      <div class="contact-card">
-        <div class="contact-label">Email</div>
-        <div class="contact-value">67smitpatelyo@gmail.com</div>
-      </div>
-      <div class="contact-card">
-        <div class="contact-label">Instagram</div>
-        <div class="contact-value">@shiv_patel_2341</div>
-      </div>
-      <div class="contact-card">
-        <div class="contact-label">Father's Mobile</div>
-        <div class="contact-value">+91 9898821106</div>
-      </div>
-      <div class="contact-card">
-        <div class="contact-label">Mother's Mobile</div>
-        <div class="contact-value">+91 9662171733</div>
-      </div>
+  <div class="section-header reveal">
+    <span class="subtitle">Get in Touch</span>
+    <h2>Contact</h2>
+    <div class="divider"><span class="line"></span><span class="diamond">&#10022;</span><span class="line"></span></div>
+  </div>
+  <div class="grid-3">
+    <div class="mini-card reveal">
+      <div class="role">Mobile</div>
+      <div class="name" style="font-family: 'Montserrat', sans-serif;">+61 413 518 312</div>
+    </div>
+    <div class="mini-card reveal">
+      <div class="role">Email</div>
+      <div class="name" style="font-family: 'Montserrat', sans-serif; font-size: 14px;">67smitpatelyo@gmail.com</div>
+    </div>
+    <div class="mini-card reveal">
+      <div class="role">Instagram</div>
+      <div class="name" style="font-family: 'Montserrat', sans-serif;">@shiv_patel_2341</div>
+    </div>
+    <div class="mini-card reveal">
+      <div class="role">Father's Mobile</div>
+      <div class="name" style="font-family: 'Montserrat', sans-serif;">+91 9898821106</div>
+    </div>
+    <div class="mini-card reveal">
+      <div class="role">Mother's Mobile</div>
+      <div class="name" style="font-family: 'Montserrat', sans-serif;">+91 9662171733</div>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>© 2025 Smit Patel &nbsp;·&nbsp; All Rights Reserved</p>
+  <div class="footer-mono">&#10022;</div>
+  <p>© 2025 Smit Patel · All Rights Reserved</p>
 </footer>
 
 <script>
-function closeMenu() {
-  document.querySelector('.nav-links').classList.remove('open');
-  document.querySelector('.nav-toggle').classList.remove('active');
-}
-</script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
 
-<script>
-function closeMenu() {
-  document.querySelector('.nav-links').classList.remove('open');
-  document.querySelector('.nav-toggle').classList.remove('active');
-}
+  // Mobile menu toggle
+  function toggleMenu() {
+    if (window.innerWidth <= 900) {
+      document.querySelector('.nav-links').classList.toggle('active');
+    }
+  }
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxClose = document.getElementById('lightbox-close');
+  document.querySelectorAll('.clickable-image').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.add('active');
+    });
+  });
+  lightboxClose.addEventListener('click', () => lightbox.classList.remove('active'));
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) lightbox.classList.remove('active');
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Scroll reveal (progressive enhancement, fail-safe)
+  document.body.classList.add('reveal-on');
+  const revealEls = Array.from(document.querySelectorAll('.reveal'));
+  const show = el => el.classList.add('visible');
+  const inView = el => {
+    const r = el.getBoundingClientRect();
+    return r.top < (window.innerHeight - 40) && r.bottom > 0;
+  };
+  // Reveal anything already on screen right away (works even at #anchor loads)
+  revealEls.forEach(el => { if (inView(el)) show(el); });
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { show(entry.target); obs.unobserve(entry.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => { if (!el.classList.contains('visible')) obs.observe(el); });
+  } else {
+    revealEls.forEach(show);
+  }
+  // Safety net: never leave content hidden
+  setTimeout(() => revealEls.forEach(show), 2500);
 </script>
 </body>
 </html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smit Patel — Biodata</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --emerald: #0F3D2E;
+    --emerald-mid: #1F5C49;
+    --emerald-deep: #0A2C20;
+    --gold: #BF9B5A;
+    --gold-light: #D9BE84;
+    --ivory: #FBF9F4;
+    --ink: #3A3A3A;
+    --line: #E3DDCC;
+  }
+
+  @page { size: A4; margin: 0; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  html, body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--ink);
+    background: var(--ivory);
+  }
+
+  .page {
+    width: 210mm;
+    padding: 6mm;
+    background: var(--ivory);
+    position: relative;
+  }
+
+  /* Decorative double-border frame */
+  .frame {
+    border: 2px solid var(--gold);
+    min-height: 266mm;
+    padding: 5mm 7mm;
+    position: relative;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(31, 92, 73, 0.045) 0%, transparent 30%),
+      radial-gradient(circle at 0% 100%, rgba(191, 155, 90, 0.05) 0%, transparent 32%),
+      var(--ivory);
+  }
+  .frame::before {
+    content: '';
+    position: absolute;
+    inset: 3mm;
+    border: 0.6pt solid var(--gold);
+    pointer-events: none;
+  }
+
+  h1, h2, h3 { font-family: 'Cormorant Garamond', serif; color: var(--emerald); font-weight: 600; }
+
+  /* ---- Header band ---- */
+  .masthead {
+    text-align: center;
+    margin-bottom: 3mm;
+  }
+  .masthead .kicker {
+    font-size: 8.5pt;
+    letter-spacing: 7px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 4px 0 2px;
+  }
+  .ornament .l { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+  .ornament .l.r { background: linear-gradient(90deg, var(--gold), transparent); }
+  .ornament .d { color: var(--gold); font-size: 11pt; }
+
+  /* ---- Hero row ---- */
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: 9mm;
+    padding-bottom: 3.5mm;
+    margin-bottom: 3.5mm;
+    border-bottom: 0.8pt solid var(--line);
+  }
+  .photo-wrap { flex-shrink: 0; position: relative; }
+  .photo-wrap img {
+    width: 37mm;
+    height: 46mm;
+    object-fit: cover;
+    border-radius: 19mm 19mm 0 0;
+    border: 2px solid #fff;
+    outline: 1px solid var(--gold);
+    box-shadow: 0 6px 16px rgba(15, 61, 46, 0.18);
+  }
+  .photo-wrap::after {
+    content: '';
+    position: absolute;
+    right: -3mm;
+    bottom: -3mm;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--gold);
+    border-radius: 19mm 19mm 0 0;
+    z-index: -1;
+  }
+  .hero-info { flex: 1; }
+  .hero-info h1 { font-size: 33pt; line-height: 1; letter-spacing: -0.5px; }
+  .hero-info .accent { width: 70px; height: 2px; background: linear-gradient(90deg, var(--gold), var(--emerald-mid)); margin: 7px 0 9px; }
+  .hero-info .role { font-size: 11pt; color: var(--emerald-mid); font-weight: 500; letter-spacing: 0.5px; }
+  .quick { display: flex; flex-wrap: wrap; gap: 5px 18px; margin-top: 11px; }
+  .quick span { font-size: 9pt; color: var(--ink); }
+  .quick b { color: var(--gold); font-weight: 600; text-transform: uppercase; font-size: 7.5pt; letter-spacing: 1px; margin-right: 5px; }
+
+  /* ---- Sections ---- */
+  .block { margin-bottom: 3mm; }
+  .block:last-child { margin-bottom: 0; }
+  .block-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 9px;
+  }
+  .block-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); }
+  .block-title .dot { color: var(--emerald-mid); }
+
+  /* detail grid */
+  .details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px 28px;
+  }
+  .d-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 0.6pt dotted var(--line);
+    padding-bottom: 5px;
+  }
+  .d-row .k { font-size: 8pt; text-transform: uppercase; letter-spacing: 1px; color: var(--emerald-mid); font-weight: 600; }
+  .d-row .v { font-size: 10pt; color: var(--emerald); font-weight: 500; text-align: right; }
+
+  /* timeline rows */
+  .tl-row { display: flex; gap: 14px; padding: 4px 0; }
+  .tl-row + .tl-row { border-top: 0.6pt dotted var(--line); margin-top: 3px; }
+  .tl-row .when { flex: 0 0 30mm; font-size: 8.5pt; font-weight: 600; color: var(--gold); letter-spacing: 1px; padding-top: 2px; }
+  .tl-row .what h3 { font-size: 13pt; line-height: 1.2; }
+  .tl-row .what p { font-size: 9pt; color: var(--ink); }
+
+  /* family + contact cards */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+  .mini {
+    background: #fff;
+    border: 0.7pt solid var(--line);
+    border-top: 2px solid var(--gold);
+    border-radius: 4px;
+    padding: 9px 11px;
+    text-align: center;
+  }
+  .mini .role { font-size: 7pt; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); font-weight: 600; margin-bottom: 4px; }
+  .mini .nm { font-family: 'Cormorant Garamond', serif; font-size: 12pt; color: var(--emerald); font-weight: 600; line-height: 1.2; }
+  .mini .sub { font-size: 8pt; color: var(--ink); margin-top: 2px; }
+  .mini.span2 { grid-column: span 2; }
+  .mini.full { grid-column: 1 / -1; }
+  .mini.full .nm { font-family: 'Montserrat', sans-serif; font-size: 9.5pt; font-weight: 500; }
+  .contact .nm { font-family: 'Montserrat', sans-serif; font-size: 9.5pt; font-weight: 500; }
+
+  .footnote {
+    text-align: center;
+    margin-top: 3mm;
+    font-size: 7.5pt;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+  .footnote .star { display: block; font-size: 11pt; margin-bottom: 3px; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="frame">
+
+      <div class="masthead">
+        <div class="kicker">Biodata</div>
+        <div class="ornament"><span class="l"></span><span class="d">&#10022;</span><span class="l r"></span></div>
+      </div>
+
+      <div class="hero">
+        <div class="photo-wrap">
+          <img src="profile.png" alt="Smit Patel">
+        </div>
+        <div class="hero-info">
+          <h1>Smit Patel</h1>
+          <div class="accent"></div>
+          <div class="role">Senior Sales Representative — Vodafone</div>
+          <div class="quick">
+            <span><b>Born</b>21 December 2001</span>
+            <span><b>Height</b>5.7</span>
+            <span><b>Weight</b>75 KG</span>
+            <span><b>Native</b>Patan</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title"><span class="dot">&#10022;</span> Personal Details</div>
+        <div class="details">
+          <div class="d-row"><span class="k">Date of Birth</span><span class="v">21 December 2001</span></div>
+          <div class="d-row"><span class="k">Caste</span><span class="v">Hindu Kadwa Patidar</span></div>
+          <div class="d-row"><span class="k">Height</span><span class="v">5.7</span></div>
+          <div class="d-row"><span class="k">Samaj</span><span class="v">Nana Bar</span></div>
+          <div class="d-row"><span class="k">Weight</span><span class="v">75 KG</span></div>
+          <div class="d-row"><span class="k">Native</span><span class="v">Patan</span></div>
+          <div class="d-row"><span class="k">Hobbies</span><span class="v">Biking, Swimming</span></div>
+          <div class="d-row"><span class="k">Maternal</span><span class="v">Kahoda</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title"><span class="dot">&#10022;</span> Education</div>
+        <div class="tl-row">
+          <div class="when">2024 — 2025</div>
+          <div class="what"><h3>Master of Information &amp; Technology</h3><p>University of Technology Sydney</p></div>
+        </div>
+        <div class="tl-row">
+          <div class="when">2019 — 2023</div>
+          <div class="what"><h3>Bachelors in Information &amp; Technology</h3><p>SilverOak Institute of Technology</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title"><span class="dot">&#10022;</span> Work Experience</div>
+        <div class="tl-row">
+          <div class="when">Current</div>
+          <div class="what"><h3>Senior Sales Representative</h3><p>Vodafone</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title"><span class="dot">&#10022;</span> Family</div>
+        <div class="cards">
+          <div class="mini"><div class="role">Grandfather</div><div class="nm">Ramniklal Prabhudas Patel</div></div>
+          <div class="mini"><div class="role">Grandmother</div><div class="nm">Ramilaben Ramniklal Patel</div></div>
+          <div class="mini"><div class="role">Father</div><div class="nm">Bhaveshkumar Ramniklal Patel</div><div class="sub">Business — Dharm Metal</div></div>
+          <div class="mini span2"><div class="role">Mother</div><div class="nm">Shilpaben Bhaveshkumar Patel</div><div class="sub">Housewife</div></div>
+          <div class="mini full"><div class="role">Address</div><div class="nm">145, Haridarshan Park Society, opp. Baroda Express Highway, Ahmedabad</div></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="block-title"><span class="dot">&#10022;</span> Contact</div>
+        <div class="cards contact">
+          <div class="mini"><div class="role">Mobile</div><div class="nm">+61 413 518 312</div></div>
+          <div class="mini"><div class="role">Email</div><div class="nm">67smitpatelyo@gmail.com</div></div>
+          <div class="mini"><div class="role">Instagram</div><div class="nm">@shiv_patel_2341</div></div>
+          <div class="mini"><div class="role">Father's Mobile</div><div class="nm">+91 9898821106</div></div>
+          <div class="mini span2"><div class="role">Mother's Mobile</div><div class="nm">+91 9662171733</div></div>
+        </div>
+      </div>
+
+      <div class="footnote"><span class="star">&#10022;</span>Smit Patel</div>
+
+    </div>
+  </div>
+</body>
+</html>
